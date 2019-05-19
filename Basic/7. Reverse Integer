@@ -1,0 +1,16 @@
+class Solution:
+    def reverse(self, x, lower_bound = -2**31, upper_bound = 2**31-1):
+        """
+        :type x: int
+        :rtype: int
+        """
+        negative = False
+        if x < 0:
+            negative = True
+        if negative:
+            reverse = int('-'+str(x)[1:][::-1])
+        else:
+            reverse = int(str(x)[::-1])
+        if  lower_bound < reverse and reverse < upper_bound:
+            return reverse
+        return 0
