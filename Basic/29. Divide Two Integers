@@ -1,0 +1,32 @@
+class Solution:
+    def divide(self, dividend: int, divisor: int) -> int:
+        if divisor == 0:
+            return
+        
+        if (dividend < 0 and divisor > 0) or (dividend >0 and divisor <0):
+            sign = -1
+        else:
+            sign = 1
+            
+        dividend, divisor = abs(dividend), abs(divisor)
+        
+        if dividend < divisor:
+            return 0
+        elif dividend == divisor:
+            return sign
+        elif divisor == 1:
+            return sign * dividend
+        
+        res = 1
+        val = divisor
+        
+        while val < dividend:
+            res <<= 1
+            val <<= 1
+            
+        if val > dividend:
+            res >>= 1
+            val >>= 1
+            return sign * (res + self.divide(dividend - val, divisor))
+        return res
+   
