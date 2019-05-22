@@ -1,0 +1,21 @@
+class Solution:
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
+        def check(nums):
+            nums = [i for i in nums if i != '.']
+            return len(set(nums)) == len(nums)
+        
+        for row in board:
+            if not check(row):
+                return False
+            
+        for col in zip(*board):
+            if not check(col):
+                return False
+            
+        for i in (0,3,6):
+            for j in (0,3,6):
+                square = [board[m][n] for m in range(i,i+3) for n in range(j,j+3)]
+                if not check(square):
+                    return False
+        
+        return True
