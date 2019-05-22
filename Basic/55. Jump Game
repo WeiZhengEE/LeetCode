@@ -1,0 +1,14 @@
+class Solution:
+    def canJump(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: bool
+        """
+        maxindex = 0
+        for i in range(len(nums)-1):
+            if i+nums[i] > maxindex:
+                maxindex = i+nums[i]
+            if not nums[i]:
+                if maxindex <= i:
+                    return False
+        return True
