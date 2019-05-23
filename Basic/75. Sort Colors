@@ -1,0 +1,19 @@
+class Solution:
+    def sortColors(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: void Do not return anything, modify nums in-place instead.
+        """
+        n = len(nums)
+        record = {'0':0,'1':0,'2':0}
+        for i in range(n):
+            record[str(nums[i])] += 1
+        for i in range(n):
+            if record['0'] != 0:
+                nums[i] = 0
+                record['0'] -= 1
+            elif record['1'] != 0:
+                nums[i] = 1
+                record['1'] -= 1
+            else:
+                nums[i] = 2
