@@ -1,0 +1,15 @@
+class Solution:
+    def inorderTraversal(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[int]
+        """
+        res = []
+        self.track(root, res)
+        return res
+    
+    def track(self, root, res):
+        if root:
+            self.track(root.left,res)
+            res.append(root.val)
+            self.track(root.right,res)
