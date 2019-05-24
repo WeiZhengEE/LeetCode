@@ -1,0 +1,26 @@
+class Solution:
+    def zigzagLevelOrder(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[List[int]]
+        """
+        if not root:
+            return []
+        flag = False
+        result = []
+        stack = [root]
+        while stack:
+            res = []
+            newstack = []
+            for i in stack:
+                res.append(i.val)
+                if i.left:
+                    newstack.append(i.left)
+                if i.right:
+                    newstack.append(i.right)
+            if flag:
+                res.reverse()
+            flag = not flag
+            result.append(res)
+            stack = newstack
+        return result
