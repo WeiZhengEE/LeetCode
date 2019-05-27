@@ -1,0 +1,31 @@
+class Solution:
+    def largestNumber(self, num: List[int]) -> str:
+        self.quick_sort(num, 0, len(num)-1)
+        num.reverse()
+        return str(int("".join(list(map(str, num)))))
+        
+    
+    def compare(self, num1, num2):
+        return str(num1) + str(num2) > str(num2) + str(num1)
+    
+    def partition(self, arr, l, r):
+        p_value = arr[l]
+        i = l
+        j = r
+        while i < j:
+            while i <= r and not self.compare(arr[i], p_value):
+                i += 1
+            while self.compare(arr[j], p_value):
+                j -= 1
+            if i < j:
+                arr[i], arr[j] = arr[j], arr[i]
+
+        arr[l] = arr[j]
+        arr[j] = p_value
+        return j
+
+    def quick_sort(self, arr, l, r):
+        if l < r:
+            p = self.partition(arr,l,r)
+            self.quick_sort(arr,l,p-1)
+            self.quick_sort(arr,p+1,r)
