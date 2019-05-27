@@ -1,0 +1,6 @@
+from functools import reduce
+class Solution:
+    def titleToNumber(self, s: str) -> int:
+        nums = list(map(lambda x:ord(x)-ord('A')+1, s))
+        res = reduce(lambda x,y:x*26+y, nums)
+        return res
