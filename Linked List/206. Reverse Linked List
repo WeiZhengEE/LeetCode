@@ -1,0 +1,11 @@
+class Solution:
+    def reverseList(self, head: ListNode) -> ListNode:
+        if head == None or head.next == None:
+            return head
+        newhead = None
+        while head:
+            temp = head.next
+            head.next = newhead
+            newhead = head
+            head = temp
+        return newhead
