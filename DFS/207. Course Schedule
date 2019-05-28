@@ -1,0 +1,28 @@
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        graph = [[] for i in range(numCourses)]
+        visit = [0 for i in range(numCourses)]
+        
+        for i in prerequisites:
+            graph[i[0]].append(i[1])
+                   
+        for i in range(numCourses):
+            if not self.dfs(i, graph, visit):
+                return False
+            
+        return True
+    
+    def dfs(self, i, graph, visit):
+        if visit[i] == 1:
+            return False
+        if visit[i] == -1:
+            return True
+
+        visit[i] = 1
+
+        for j in graph[i]:
+            if not self.dfs(j, graph, visit):
+                return False
+
+        visit[i] = -1
+        return True
