@@ -1,0 +1,17 @@
+class Solution:
+    def coinChange(self, coins: List[int], amount: int) -> int:
+
+        MAX = float('inf')
+        coins.sort()
+        dp = [0] + [MAX] * amount
+        
+        for i in range(1, amount + 1):
+            temp = [MAX]
+            for c in coins:
+                if i-c >= 0:
+                    temp.append(dp[i-c])
+            dp[i] = min(temp) + 1
+        if dp[amount] == MAX:
+            return -1
+        else:
+            return dp[amount]
