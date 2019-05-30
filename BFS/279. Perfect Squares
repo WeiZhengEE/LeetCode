@@ -1,0 +1,22 @@
+class Solution:
+    def numSquares(self, n: int) -> int:
+        if n < 2:
+            return n
+        nums = set()
+        i = 1
+        while i * i <= n:
+            nums.add( i * i )
+            i += 1
+        count = 0
+        check = set([n])
+        while check:
+            count += 1
+            newcheck = set()
+            for i in check:
+                if i in nums:
+                    return count
+                for j in nums:
+                    if i-j > 0:
+                        newcheck.add(i-j)
+            check = newcheck
+        return count
