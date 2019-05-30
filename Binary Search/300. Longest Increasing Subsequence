@@ -1,0 +1,28 @@
+class Solution:
+    def lengthOfLIS(self, nums: List[int]) -> int:
+        if not nums:
+            return 0
+        tails = [0 for i in range(len(nums)+1)]
+        tails[0] = nums[0]
+        pointer = 1
+        for i in range(1,len(nums)):
+            if nums[i] < tails[0]:
+                tails[0] = nums[i]
+            elif nums[i] > tails[pointer-1]:
+                tails[pointer] = nums[i]
+                pointer += 1
+            else:
+                index = self.findindex(tails, pointer, nums[i])
+                tails[index] = nums[i]
+        return pointer
+    
+    def findindex(self, tails, pointer, num):
+        l = 0
+        r = pointer - 1
+        while l < r:
+            m = (r+l)//2
+            if tails[m] < num:
+                l = m + 1
+            else:
+                r = m
+        return r
