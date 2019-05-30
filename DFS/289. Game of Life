@@ -1,0 +1,29 @@
+class Solution:
+    def gameOfLife(self, board: List[List[int]]) -> None:
+        for i in range(len(board)):
+            for j in range(len(board[0])):
+                self.DFS(board,i,j)
+        for i in range(len(board)):
+            for j in range(len(board[0])):
+                if board[i][j] == 3:
+                    board[i][j] = 0
+                elif board[i][j] == 2:
+                    board[i][j] = 1
+        
+    def DFS(self, board, i, j):
+        count = 0
+        m =len(board)-1
+        n = len(board[0])-1
+        if i-1 >=0 and j-1 >=0: count += board[i-1][j-1]%2
+        if i-1 >=0: count += board[i-1][j]%2
+        if i-1 >=0 and j+1 <=n: count += board[i-1][j+1]%2
+        if j-1 >=0: count += board[i][j-1]%2
+        if j+1 <=n: count += board[i][j+1]%2
+        if i+1 <=m and j-1 >=0: count += board[i+1][j-1]%2
+        if i+1 <=m: count += board[i+1][j]%2
+        if i+1 <=m and j+1 <=n: count += board[i+1][j+1]%2
+        if board[i][j] == 1 and (count < 2 or count > 3):
+            board[i][j] = 3
+        if board[i][j] == 0 and count == 3:
+            board[i][j] = 2
+        return
