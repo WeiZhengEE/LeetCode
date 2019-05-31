@@ -1,0 +1,11 @@
+class Solution(object):
+    def kthSmallest(self, matrix, k):
+        l = matrix[0][0]
+        r = matrix[-1][-1]
+        while l < r:
+            m = (l+r)//2
+            if sum(bisect.bisect_right(row, m) for row in matrix) < k:
+                l = m + 1
+            else:
+                r = m
+        return l
