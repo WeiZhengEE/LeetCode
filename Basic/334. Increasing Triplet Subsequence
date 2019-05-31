@@ -1,0 +1,15 @@
+class Solution:
+    def increasingTriplet(self, nums: List[int]) -> bool:
+        if len(nums)<3:
+            return False
+        first_min = max(nums)
+        second_min = max(nums)
+        for i in nums:
+            if i <= first_min:
+                first_min = i
+            elif i <= second_min:
+                second_min = i
+            else:
+                return True
+            
+        return False
