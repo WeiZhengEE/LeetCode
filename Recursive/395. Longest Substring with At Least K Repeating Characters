@@ -1,0 +1,8 @@
+class Solution:
+    def longestSubstring(self, s: str, k: int) -> int:
+        if len(s) < k:
+            return 0
+        rare_c = min(set(s), key = s.count)
+        if s.count(rare_c) >= k:
+            return len(s)
+        return max(self.longestSubstring(substring,k) for substring in s.split(rare_c))
