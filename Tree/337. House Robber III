@@ -1,0 +1,16 @@
+class Solution(object):
+    def rob(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        (a,b) = self.helper(root)
+        return max(a,b)
+        
+    def helper(self, root):
+        if not root:
+            return (0,0)
+        
+        left = self.helper(root.left)
+        right = self.helper(root.right)
+        return (root.val+left[1]+right[1], max(left)+max(right))
