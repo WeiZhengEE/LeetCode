@@ -1,0 +1,11 @@
+class Solution(object):
+    def countBits(self, num):
+        """
+        :type num: int
+        :rtype: List[int]
+        """
+        res = [0]
+        while len(res)-1 < num:
+            res += [i+1 for i in res]
+            
+        return res[0:num+1] 
