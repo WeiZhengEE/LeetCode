@@ -1,0 +1,45 @@
+class Solution(object):
+    def calcEquation(self, equations, values, queries):
+        """
+        :type equations: List[List[str]]
+        :type values: List[float]
+        :type queries: List[List[str]]
+        :rtype: List[float]
+        """
+        graph = {}
+        
+        def add_edge(start, end, value):
+            if start in graph:
+                graph[start].append((end,value))
+            else:
+                graph[start] = [(end,value)]
+                
+        for i in range(len(equations)):
+            add_edge(equations[i][0], equations[i][1], values[i])
+            add_edge(equations[i][1], equations[i][0], 1.0/values[i])
+            
+        def find_path(start, end):
+            if start not in graph or end not in graph:
+                return -1.0
+            
+            nodes = [(start, 1.0)]
+            visit = set()
+            
+            while nodes:
+                node, value = nodes.pop(0)
+                visit.add(node)
+                
+                if node == end:
+                    return value
+                
+                for i in graph[node]:
+                    if i[0] not in visit:
+                        nodes.append((i[0], value * i[1]))
+                
+            return -1.0
+            
+        res = []
+        for i in queries:
+            res.append(find_path(i[0], i[1]))
+        
+        return res
