@@ -1,0 +1,10 @@
+class Solution(object):
+    def maxProfit(self, price):
+        """
+        :type prices: List[int]
+        :rtype: int
+        """
+        nothold, hold, cooling = 0, -float("inf"), -float("inf")
+        for p in price:
+            nothold, hold, cooling = max(nothold, cooling), max(hold, nothold-p), hold+p
+        return max(nothold, cooling)
