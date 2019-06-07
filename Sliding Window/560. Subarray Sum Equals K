@@ -1,0 +1,13 @@
+class Solution:
+    def subarraySum(self, nums: List[int], k: int) -> int:
+        if not nums:
+            return 0
+        record = {0:1}
+        res = 0
+        currentsum = 0
+        for i in range(0,len(nums)):
+            currentsum += nums[i]
+            if currentsum-k in record:
+                res += record[currentsum-k]
+            record[currentsum] = record.get(currentsum, 0)+1
+        return res
