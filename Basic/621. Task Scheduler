@@ -1,0 +1,9 @@
+class Solution:
+    def leastInterval(self, tasks: List[str], n: int) -> int:
+        record = {}
+        for i in tasks:
+            record[i] = record.get(i, 0) + 1
+        frequency = list(record.values())
+        m = max(frequency)
+        num_m = frequency.count(m)
+        return max((m-1)*(n+1)+num_m, len(tasks))
