@@ -1,0 +1,19 @@
+class Solution:
+    def pathSum(self, root: TreeNode, sum: int) -> int:
+        self.res = 0
+        self.pathrecord = {0:1}
+        self.dfs(root, sum, 0)
+        return self.res
+        
+    def dfs(self, root, target, lastsum):
+        if not root:
+            return
+        currentsum = lastsum + root.val
+        oldsum = currentsum - target
+        self.res += self.pathrecord.get(oldsum, 0)
+        self.pathrecord[currentsum] = self.pathrecord.get(currentsum, 0) + 1
+        
+        self.dfs(root.left, target, currentsum)
+        self.dfs(root.right, target, currentsum)
+        
+        self.pathrecord[currentsum] -= 1
