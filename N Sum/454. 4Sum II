@@ -1,3 +1,4 @@
+Python:
 class Solution:
     def fourSumCount(self, A: List[int], B: List[int], C: List[int], D: List[int]) -> int:
         record = {}
@@ -13,3 +14,22 @@ class Solution:
                 if -c-d in record:
                     count += record[-c-d]
         return count
+
+Java:
+class Solution {
+    public int fourSumCount(int[] A, int[] B, int[] C, int[] D) {
+        int count = 0;
+        Map<Integer, Integer> record = new HashMap<>();
+        for(int a: A){
+            for(int b: B){
+                record.put(a+b, record.getOrDefault(a+b,0)+1);
+            }
+        }
+        for(int c: C){
+            for (int d: D){
+                count += record.getOrDefault(-c-d, 0);
+            }
+        }
+        return count;
+    }
+}
