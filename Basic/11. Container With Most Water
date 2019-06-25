@@ -1,3 +1,4 @@
+Python:
 class Solution(object):
     def maxArea(self, height):
         """
@@ -12,4 +13,26 @@ class Solution(object):
                 i += 1
             else:
                 j -= 1
-return water
+        return water
+
+Java:
+class Solution {
+    public int maxArea(int[] height) {
+        int l = 0;
+        int r = height.length-1;
+        int maxC = 0;
+        int c = 0;
+        while(l<r){
+            c = Math.min(height[r],height[l])*(r-l);
+            if(maxC < c){
+                maxC = c;
+            }
+            if(height[l] < height[r]){
+                l ++;
+            }else{
+                r --;
+            }
+        }
+        return maxC;
+    }
+}
