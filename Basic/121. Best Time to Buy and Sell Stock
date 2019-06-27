@@ -1,3 +1,4 @@
+Python:
 class Solution:
     def maxProfit(self, prices):
         """
@@ -10,3 +11,17 @@ class Solution:
             profit = price - min_price
             max_profit = max(max_profit, profit)
         return max_profit
+
+Java:
+class Solution {
+    public int maxProfit(int[] prices) {
+        int res = 0;
+        int lowP = Integer.MAX_VALUE;
+        for(int i = 0;i < prices.length;i++){
+            res = Math.max(res, prices[i]-lowP);
+            lowP = Math.min(lowP, prices[i]);
+        }
+        return res;
+        
+    }
+}
