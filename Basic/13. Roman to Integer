@@ -1,3 +1,4 @@
+Python:
 class Solution:
     def romanToInt(self, s):
         """
@@ -18,3 +19,31 @@ class Solution:
             pre = cur
         
         return total
+
+Java:
+class Solution {
+    public int romanToInt(String s) {
+        int res = 0;
+        Map<Character, Integer> record = new HashMap<>();
+        record.put('I', 1);
+        record.put('V', 5);
+        record.put('X', 10);
+        record.put('L', 50);
+        record.put('C', 100);
+        record.put('D', 500);
+        record.put('M', 1000);
+        int last = 0;
+        int cur = 0;
+        for(int i=s.length()-1;i>=0;i--){
+            cur = record.get(s.charAt(i));
+            if(cur<last){
+                res -= cur;
+            }else{
+                res += cur;
+            }
+            last = cur;
+        }
+        return res;
+        
+    }
+}
