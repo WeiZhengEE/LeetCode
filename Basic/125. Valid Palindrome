@@ -1,4 +1,32 @@
+Python:
 class Solution:
     def isPalindrome(self, s: str) -> bool:
         s = ''.join([e for e in s if e.isalnum()]).lower()
         return s==s[::-1]
+
+Java:
+class Solution {
+    public boolean isPalindrome(String s) {
+        if (s.isEmpty()) return true;
+        int i = 0;
+        int j = s.length() -1;
+        char ci;
+        char cj;
+        while(i <= j){
+            ci = s.charAt(i);
+            cj = s.charAt(j);
+            if(!Character.isLetterOrDigit(ci)){
+                i++;
+            }else if(!Character.isLetterOrDigit(cj)){
+                j--;
+            }else if(Character.toLowerCase(ci) != Character.toLowerCase(cj)){              
+                return false;
+            }else{
+                i++;
+                j--;   
+            }
+        }
+        return true;
+        
+    }
+}
