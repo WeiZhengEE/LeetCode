@@ -1,3 +1,4 @@
+Python:
 class Solution:
     def fractionToDecimal(self, numerator: int, denominator: int) -> str:
         sign = '-' if numerator*denominator < 0 else ''
@@ -12,3 +13,33 @@ class Solution:
             digit, remainder = divmod(10*abs(remainder), abs(denominator))
             tail += str(digit)
         return sign + str(head) + (tail and '.'+tail)
+
+Java:
+class Solution {
+    public String fractionToDecimal(int numerator, int denominator) {
+        if(numerator==0) return "0";
+        StringBuilder res = new StringBuilder();
+        res.append(((numerator > 0) ^ (denominator > 0))?"-":"");
+        long num = Math.abs((long)numerator);
+        long den = Math.abs((long)denominator);
+        res.append(num/den);
+        if(num%den!=0){
+            num %= den;
+            res.append('.');
+            HashMap<Long, Integer> record = new HashMap<>();
+            record.put(num, res.length());
+            while(num != 0){
+                num *= 10;
+                res.append(num/den);
+                num %= den;
+                if(record.containsKey(num)){
+                    res.insert((int)record.get(num), '(');
+                    res.append(')');
+                    break;
+                }
+                record.put(num, res.length());
+            }
+        }
+        return res.toString();
+    }
+}
