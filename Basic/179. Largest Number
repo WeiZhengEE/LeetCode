@@ -1,3 +1,4 @@
+Python:
 class Solution:
     def largestNumber(self, num: List[int]) -> str:
         self.quick_sort(num, 0, len(num)-1)
@@ -29,3 +30,19 @@ class Solution:
             p = self.partition(arr,l,r)
             self.quick_sort(arr,l,p-1)
             self.quick_sort(arr,p+1,r)
+
+Java:
+class Solution {
+    public String largestNumber(int[] nums) {
+        if(null == nums || nums.length == 0) return "";
+        String[] num = new String[nums.length];
+        for(int i = 0;i<num.length;i++){
+            num[i] = String.valueOf(nums[i]);
+        }
+        Arrays.sort(num, (s1, s2)->(s2+s1).compareTo(s1+s2));
+        if(num[0].equals("0")) return "0";
+        StringBuilder res = new StringBuilder();
+        for(String s: num) res.append(s);
+        return res.toString();        
+    }
+}
