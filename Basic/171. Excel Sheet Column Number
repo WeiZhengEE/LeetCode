@@ -1,6 +1,18 @@
+Python:
 from functools import reduce
 class Solution:
     def titleToNumber(self, s: str) -> int:
         nums = list(map(lambda x:ord(x)-ord('A')+1, s))
         res = reduce(lambda x,y:x*26+y, nums)
         return res
+
+Java:
+class Solution {
+    public int titleToNumber(String s) {
+        int res = 0;
+        for(int i = 0;i<s.length();i++){
+            res = res * 26 + (s.charAt(i) - 'A' + 1);
+        }
+        return res;
+    }
+}
