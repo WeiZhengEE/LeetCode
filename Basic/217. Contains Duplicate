@@ -1,3 +1,4 @@
+Python:
 class Solution:
     def containsDuplicate(self, nums: List[int]) -> bool:
         record = set()
@@ -6,3 +7,14 @@ class Solution:
                 return True
             record.add(num)
         return False
+
+Java:
+class Solution {
+    public boolean containsDuplicate(int[] nums) {
+        Set<Integer> record = new HashSet<>();
+        for(int i = 0; i<nums.length; i++){
+            if(!record.add(nums[i])) return true;
+        }
+        return false;
+    }
+}
