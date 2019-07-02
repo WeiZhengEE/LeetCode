@@ -1,3 +1,4 @@
+Python:
 class Solution(object):
     def isHappy(self, n):
         mem = set()
@@ -9,3 +10,23 @@ class Solution(object):
                 mem.add(n)
         else:
             return True
+
+Java:
+class Solution {
+    public boolean isHappy(int n) {
+        Set<Integer> record = new HashSet<>();
+        int squareSum;
+        int lastDigit;
+        while(record.add(n)){
+            squareSum = 0;
+            while(n > 0){
+                lastDigit = n%10;
+                squareSum += lastDigit*lastDigit;
+                n /= 10;
+            }
+            if(squareSum == 1) return true;
+            n = squareSum;
+        }
+        return false;       
+    }
+}
