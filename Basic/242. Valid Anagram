@@ -1,3 +1,4 @@
+Python:
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
         record = {}
@@ -17,3 +18,24 @@ class Solution:
                 return False
             
         return True
+
+Java:
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        Map<Character, Integer> record = new HashMap<>();
+        char temp;
+        for(int i = 0; i < s.length();i++){
+            temp = s.charAt(i);
+            record.put(temp, record.getOrDefault(temp, 0)+1);
+        }
+        for(int i = 0; i<t.length();i++){
+            temp = t.charAt(i);
+            if(record.getOrDefault(temp, 0) == 0){
+                return false;
+            }else{
+                record.put(temp, record.get(temp)-1);
+            }
+        }
+        return s.length() == t.length();
+    }
+}
