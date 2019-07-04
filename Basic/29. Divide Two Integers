@@ -1,3 +1,4 @@
+Python:
 class Solution:
     def divide(self, dividend: int, divisor: int) -> int:
         if divisor == 0:
@@ -30,3 +31,30 @@ class Solution:
             return sign * (res + self.divide(dividend - val, divisor))
         return res
    
+Java:
+class Solution {
+    public int divide(int dividend, int divisor) {
+        int sign = 1;
+        if(dividend > 0 && divisor < 0 || dividend < 0 && divisor > 0) sign = -1;
+        dividend = Math.abs(dividend);
+        divisor = Math.abs(divisor);
+        
+        if(dividend < divisor) return 0;
+        if(dividend == divisor) return sign;
+        if(divisor == 1) return sign * dividend;
+        
+        int res = 1;
+        int val = divisor;
+        while(val < dividend){
+            res <<= 1;
+            val <<= 1;
+        }
+        if(val>dividend){
+            res >>= 1;
+            val >>= 1;
+            return sign*(res+divide(dividend-val, divisor));
+        }
+        return res;
+        
+    }
+}
