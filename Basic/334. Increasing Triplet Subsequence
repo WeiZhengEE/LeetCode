@@ -1,3 +1,4 @@
+Python:
 class Solution:
     def increasingTriplet(self, nums: List[int]) -> bool:
         if len(nums)<3:
@@ -10,6 +11,24 @@ class Solution:
             elif i <= second_min:
                 second_min = i
             else:
-                return True
-            
+                return True        
         return False
+
+Java:
+class Solution {
+    public boolean increasingTriplet(int[] nums) {
+        if(nums.length < 3) return false;
+        int firstMin = Integer.MAX_VALUE;
+        int secondMin = Integer.MAX_VALUE;
+        for(int i = 0;i < nums.length;i++){
+            if(nums[i] <= firstMin){
+                firstMin = nums[i];
+            }else if(nums[i] <= secondMin){
+                secondMin = nums[i];
+            }else{
+                return true;
+            }
+        }
+        return false;
+    }
+}
