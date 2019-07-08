@@ -1,3 +1,4 @@
+Python:
 class Solution:
     def reconstructQueue(self, people: List[List[int]]) -> List[List[int]]:
         if not people:
@@ -7,3 +8,15 @@ class Solution:
         for i in people:
             res.insert(i[1],i)
         return res
+
+Java:
+class Solution {
+    public int[][] reconstructQueue(int[][] people) {
+        Arrays.sort(people, (a,b) -> a[0] == b[0]? a[1]-b[1]:b[0]-a[0]);
+        List<int[]> res = new LinkedList<>();
+        for(int[] person:people){
+            res.add(person[1], person);
+        }
+        return res.toArray(new int[res.size()][]);
+    }
+}
