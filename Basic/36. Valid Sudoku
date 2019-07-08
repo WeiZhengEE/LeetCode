@@ -1,3 +1,4 @@
+Python:
 class Solution:
     def isValidSudoku(self, board: List[List[str]]) -> bool:
         def check(nums):
@@ -19,3 +20,19 @@ class Solution:
                     return False
         
         return True
+
+Java:
+class Solution {
+    public boolean isValidSudoku(char[][] board) {
+        Set<String> record = new HashSet<>();
+        for(int i = 0; i < 9; i++){
+            for(int j = 0; j < 9;j++){
+                char num = board[i][j];
+                if(num!='.'){
+                    if(!record.add(num+"row"+i) || !record.add(num+"col"+j) || !record.add(num +"block"+i/3+j/3)) return false;
+                }
+            }
+        }
+        return true;       
+    }
+}
