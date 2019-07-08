@@ -1,3 +1,4 @@
+Python:
 class Solution:
     def decodeString(self, s: str) -> str:
         stack = []
@@ -17,3 +18,34 @@ class Solution:
             else:
                 substring += i
         return substring
+
+Java:
+import java.util.Stack;
+class Solution {
+    public String decodeString(String s) {
+        Stack<Integer> nums = new Stack<>();
+        Stack<String> strings = new Stack<>();
+        StringBuilder subString = new StringBuilder();
+        StringBuilder num = new StringBuilder();
+        StringBuilder res = new StringBuilder();
+        for(int i = 0; i < s.length();i++){
+            char temp = s.charAt(i);
+            if(Character.isDigit(temp)){
+                num.append(temp);
+            }else if(temp == '['){
+                nums.push(Integer.parseInt(num.toString()));
+                strings.push(subString.toString());
+                subString = new StringBuilder();
+                num = new StringBuilder();
+            }else if(temp == ']'){
+                res = new StringBuilder(strings.pop());
+                int count = nums.pop();
+                for(int j = 0; j < count;j++) res.append(subString.toString());
+                subString = res;          
+            }else{
+                subString.append(temp);
+            }
+        }
+        return subString.toString();       
+    }
+}
