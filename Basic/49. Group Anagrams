@@ -1,3 +1,4 @@
+Python:
 class Solution:
     def groupAnagrams(self, strs):
         """
@@ -15,3 +16,22 @@ class Solution:
         for j in d:
             res.append(d[j])
         return res
+
+Java:
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        Map<String,List<String>> record = new HashMap<>();
+        for(String s:strs){
+            char[] key = s.toCharArray();
+            Arrays.sort(key);
+            String keyValue = String.valueOf(key);
+            if(record.containsKey(keyValue)){
+                record.get(keyValue).add(s);
+            }else{
+                record.put(keyValue, new LinkedList<String>());
+                record.get(keyValue).add(s);
+            }
+        }
+        return new LinkedList<List<String>>(record.values());
+    }
+}
