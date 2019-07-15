@@ -1,3 +1,4 @@
+Python:
 class Solution:
     def lengthOfLIS(self, nums: List[int]) -> int:
         if not nums:
@@ -26,3 +27,40 @@ class Solution:
             else:
                 r = m
         return r
+
+Java:
+class Solution {
+    public int lengthOfLIS(int[] nums) {
+        if(null == nums || nums.length == 0) return 0;
+        int[] subInt = new int[nums.length+1];
+        subInt[0] = nums[0];
+        int p = 1;
+        for(int num:nums){
+            if(num < subInt[0]){
+                subInt[0] = num;
+            }else if(num > subInt[p-1]){
+                subInt[p] = num;
+                p++;
+            }else{
+                int index = findIndex(subInt, p-1, num);
+                subInt[index] = num;
+            }
+        }
+        return p;
+    }
+    
+    public int findIndex(int[] nums, int end, int num){
+        int l = 0;
+        int r = end;
+        int m;
+        while(l<r){
+            m = (l+r)/2;
+            if(nums[m] < num){
+                l = m+1;
+            }else{
+                r = m;
+            }
+        }
+        return r;
+    }
+}
