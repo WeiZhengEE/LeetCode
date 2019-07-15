@@ -1,3 +1,4 @@
+Python:
 class Solution(object):
     def kthSmallest(self, matrix, k):
         l = matrix[0][0]
@@ -9,3 +10,36 @@ class Solution(object):
             else:
                 r = m
         return l
+
+Java:
+class Solution {
+    public int kthSmallest(int[][] matrix, int k) {
+        int n = matrix.length;
+        int l = matrix[0][0];
+        int r = matrix[n-1][n-1];
+        int m;
+        int count;
+        while(l <= r){
+            m = l+(r-l)/2;
+            count = getLessEqual(matrix, m);
+            if(count < k) l = m+1;
+            else r = m-1;
+        }
+        return l;
+    }
+        
+    private int getLessEqual(int[][] matrix, int val) {
+        int res = 0;
+        int i = matrix.length-1;
+        int j = 0;
+        while(i >= 0 && j < matrix.length){
+            if(matrix[i][j] > val){
+                i--;
+            }else{
+                res += i+1;
+                j++;
+            }
+        }
+        return res;
+    }
+}
