@@ -1,3 +1,4 @@
+Python:
 class Solution:
     def mySqrt(self, x):
         """
@@ -14,3 +15,24 @@ class Solution:
                 r = mid
             else:
                 l = mid
+
+Java:
+class Solution {
+    public int mySqrt(int x) {
+        int l = 1;
+        int r = x;
+        int m;
+        int res = 0;
+        while(l <= r){
+            m = l + (r-l)/2;
+             if (m <= x/m){
+                l = m + 1;
+                res = m;
+            }
+            else{
+                r = m - 1;
+            }
+        }
+        return res;
+    }
+}
