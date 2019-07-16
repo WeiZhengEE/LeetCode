@@ -1,3 +1,4 @@
+Python:
 class Solution:
     def merge(self, intervals: List[List[int]]) -> List[List[int]]:
         if len(intervals) < 2:
@@ -10,3 +11,23 @@ class Solution:
             else:
                 res[-1][1] = max(res[-1][1], intervals[i][1])
         return res
+
+Java:
+class Solution {
+    public int[][] merge(int[][] intervals) {
+        if(intervals.length < 2) return intervals;
+        Arrays.sort(intervals, (a,b)->Integer.compare(a[0], b[0]));
+        List<int[]> res = new ArrayList<>();
+        int[] newInterval = intervals[0];
+        res.add(newInterval);
+        for(int[] interval : intervals){
+            if(interval[0] <= newInterval[1]){
+                newInterval[1] = Math.max(interval[1], newInterval[1]);
+            }else{
+                newInterval = interval;
+				res.add(newInterval);
+            }
+        }
+        return res.toArray(new int[res.size()][]);        
+    }
+}
