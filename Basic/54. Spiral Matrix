@@ -1,3 +1,4 @@
+Python:
 class Solution:
     def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
         if not matrix:
@@ -21,3 +22,43 @@ class Solution:
                 res.append(matrix[i][v1])
             v1 += 1
         return res[:m*n]
+
+Java:
+class Solution {
+    public List<Integer> spiralOrder(int[][] matrix) {     
+        List<Integer> res = new LinkedList<>();
+        if (matrix.length == 0) {
+            return res;
+        }
+        int m = matrix.length;
+        int n = matrix[0].length;
+        int count = 0;
+        int v1 = 0;
+        int v2 = n-1;
+        int h1 = 0;
+        int h2 = m-1;
+        while(count < m*n){
+            for(int i = v1;i < v2+1;i++){
+                res.add(matrix[h1][i]);
+                count++;
+            }
+            h1++;
+            for(int i = h1;i < h2+1;i++){
+                res.add(matrix[i][v2]);
+                count++;
+            }
+            v2--;
+            for(int i = v2; i > v1-1;i--){
+                res.add(matrix[h2][i]);
+                count++;
+            }
+            h2--;
+            for(int i = h2; i > h1-1;i--){
+                res.add(matrix[i][v1]);
+                count++;
+            }
+            v1++;
+        }
+        return res.subList(0,m*n);
+    }
+}
