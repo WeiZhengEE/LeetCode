@@ -1,3 +1,4 @@
+Python:
 class Solution(object):
     def longestPalindrome(self, s):
         """
@@ -19,3 +20,42 @@ class Solution(object):
             l -= 1
             r += 1
         return s[l+1:r]
+
+Java:
+class Solution {
+    public String longestPalindrome(String s) {
+        if(null == s || s.length() == 0) return s;
+        int start = 0;
+        int end = 0;
+        int l;
+        int r;
+        int n = s.length();
+        for(int i = 0; i < n; i++){
+            l = i;
+            r = i;
+            while(l >=0 && r < n && s.charAt(l) == s.charAt(r)){
+                l--;
+                r++;
+            }
+            l++;
+            r--;
+            if(r-l > end-start){
+                start = l;
+                end = r;
+            }
+            l = i;
+            r = i+1;
+            while(l >=0 && r < n && s.charAt(l) == s.charAt(r)){
+                l--;
+                r++;
+            }
+            l++;
+            r--;
+            if(r-l > end-start){
+                start = l;
+                end = r;
+            }
+        }
+        return s.substring(start, end+1);
+    }   
+}
