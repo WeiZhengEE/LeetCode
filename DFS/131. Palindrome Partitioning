@@ -1,3 +1,4 @@
+Python:
 class Solution:
     def partition(self, s: str) -> List[List[str]]:
         res = []
@@ -13,3 +14,36 @@ class Solution:
                 path.append(s[:i])
                 self.dfs(s[i:],path,res)
                 path.pop()
+
+Java:
+class Solution {
+    public List<List<String>> partition(String s) {
+        List<List<String>> res = new LinkedList<>();
+        List<String> path = new LinkedList<>();
+        dfs(s, path, res);
+        return res;
+    }
+    
+    public void dfs(String s, List<String> path, List<List<String>> res){
+        if(null == s || s.length() == 0){
+            res.add(new LinkedList<String>(path));
+            return;
+        }
+        for(int i = 1;i <= s.length();i++){
+            if(check(s.substring(0,i))){
+                path.add(s.substring(0,i));
+                dfs(s.substring(i), path, res);
+                path.remove(path.size()-1);
+            }
+        }        
+    }
+    
+    public boolean check(String s){
+        int l = 0;
+        int r = s.length()-1;
+        while(l < r){
+            if(s.charAt(l++) != s.charAt(r--)) return false;
+        }
+        return true;
+    }
+}
