@@ -1,3 +1,4 @@
+Python:
 class Solution:
     def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
         graph = [[] for i in range(numCourses)]
@@ -25,3 +26,34 @@ class Solution:
         visit[i] = -1
         res.append(i)
         return True
+
+Java:
+class Solution {
+    public int[] findOrder(int numCourses, int[][] prerequisites) {
+        List<Integer> res = new ArrayList<>();
+        ArrayList[] graph = new ArrayList[numCourses];
+        int[] visited = new int[numCourses];
+        for(int i = 0; i < numCourses; i++) graph[i] = new ArrayList<Integer>();
+        for(int i = 0; i < prerequisites.length; i++) graph[prerequisites[i][0]].add(prerequisites[i][1]);
+        for(int i = 0; i < numCourses; i++){
+            if(!dfs(graph, visited, i, res)) return new int[0];
+        }
+        int[] result = new int[res.size()];
+        for(int i = 0; i<result.length;i++){
+            result[i] = res.get(i);
+        }
+        return result;
+    }
+    
+    public boolean dfs(ArrayList[] graph, int[] visited, int i, List res){
+        if(visited[i] == 1) return false;
+        if(visited[i] == -1) return true;
+        visited[i] = 1;
+        for(int j = 0; j < graph[i].size();j++){
+            if(!dfs(graph, visited, (int)graph[i].get(j) ,res)) return false;
+        }
+        res.add(i);
+        visited[i] = -1;
+        return true;
+    }
+}
