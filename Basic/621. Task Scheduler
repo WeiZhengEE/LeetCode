@@ -1,3 +1,4 @@
+Python:
 class Solution:
     def leastInterval(self, tasks: List[str], n: int) -> int:
         record = {}
@@ -7,3 +8,22 @@ class Solution:
         m = max(frequency)
         num_m = frequency.count(m)
         return max((m-1)*(n+1)+num_m, len(tasks))
+
+Java:
+class Solution {
+    public int leastInterval(char[] tasks, int n) {
+        int[] count = new int[26];
+        int modeFre = 0;
+        int modeNum = 0;
+        for(char c: tasks){
+            count[c-'A']++;
+            if(modeFre == count[c-'A']){
+                modeNum++;
+            }else if(modeFre < count[c-'A']){
+                modeFre = count[c-'A'];
+                modeNum = 1;
+            }
+        }
+        return Math.max((modeFre-1)*(n+1)+modeNum, tasks.length);
+    }
+}
