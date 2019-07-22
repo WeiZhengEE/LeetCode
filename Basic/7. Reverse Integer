@@ -1,3 +1,4 @@
+Python:
 class Solution:
     def reverse(self, x, lower_bound = -2**31, upper_bound = 2**31-1):
         """
@@ -14,3 +15,19 @@ class Solution:
         if  lower_bound < reverse and reverse < upper_bound:
             return reverse
         return 0
+
+Java:
+class Solution {
+    public int reverse(int x) {
+        long result = 0;
+        while (x != 0)
+        {
+            int tail = x % 10;
+            long newResult = result * 10 + tail;
+            if( newResult > Integer.MAX_VALUE || newResult < Integer.MIN_VALUE) return 0;
+            result = newResult;
+            x = x / 10;
+        }
+        return (int)result;
+    }
+}
