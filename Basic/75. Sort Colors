@@ -1,3 +1,4 @@
+Python:
 class Solution:
     def sortColors(self, nums):
         """
@@ -17,3 +18,26 @@ class Solution:
                 record['1'] -= 1
             else:
                 nums[i] = 2
+
+Java:
+class Solution {
+    public void sortColors(int[] nums) {
+        int i = 0;
+        int j = nums.length-1;
+        int index = 0;
+        while(index <= j){
+            if(nums[index] == 0){
+                nums[index] = nums[i];
+                nums[i] = 0;
+                i++;
+                index++;
+            }else if(nums[index] == 2){
+                nums[index] = nums[j];
+                nums[j] = 2;
+                j--;
+            }else{
+                index++;
+            }
+        }        
+    }
+}
