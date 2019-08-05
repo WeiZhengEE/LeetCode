@@ -1,3 +1,4 @@
+Python:
 class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
         res = []
@@ -12,3 +13,26 @@ class Solution:
             return
         for i in range(index, len(candidates)):
             self.dfs(candidates, target-candidates[i], i, path+[candidates[i]], res)
+
+Java:
+class Solution {
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<List<Integer>> res = new ArrayList<>();
+        dfs(candidates, target, 0, new ArrayList<>(), res);
+        return res;
+    }
+    
+    public void dfs(int[] nums, int target, int start, List<Integer> path, List<List<Integer>> res){
+        if(target < 0) return;
+        if(target == 0){
+            res.add(path);
+            return;
+        }
+        for(int i = start; i < nums.length; i++){
+            List<Integer> newpath = new ArrayList<>(path);
+            newpath.add(nums[i]);
+            dfs(nums, target-nums[i], i, newpath, res);
+        }
+        return;
+    }
+}
