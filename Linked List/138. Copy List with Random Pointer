@@ -1,3 +1,4 @@
+Python:
 class Solution:
     def copyRandomList(self, head: 'Node') -> 'Node':
         dic = {}
@@ -10,3 +11,23 @@ class Solution:
             dic[n].random = dic.get(n.random)
             n = n.next
         return dic.get(head)
+
+Java:
+class Solution {
+    public Node copyRandomList(Node head) {
+        Map <Node, Node> oldToNew = new HashMap<>();
+        if(null == head) return head;
+        Node node = head;
+        while(node != null){
+            oldToNew.put(node, new Node(node.val, null, null));
+            node = node.next;
+        }
+        node = head;
+        while(node != null){
+            oldToNew.get(node).next = oldToNew.get(node.next);
+            oldToNew.get(node).random = oldToNew.get(node.random);
+            node = node.next;
+        }
+        return oldToNew.get(head);        
+    }
+}
