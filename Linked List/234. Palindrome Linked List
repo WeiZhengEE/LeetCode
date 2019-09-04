@@ -1,3 +1,4 @@
+Python:
 class Solution:
     def isPalindrome(self, head: ListNode) -> bool:
         fast = slow = head
@@ -19,3 +20,29 @@ class Solution:
             head = head.next
         
         return True
+
+Java:
+class Solution {
+    public boolean isPalindrome(ListNode head) {
+        ListNode fast = head;
+        ListNode slow = head;
+        while(fast != null && fast.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        ListNode newhead = null;
+        ListNode temp = null;
+        while(slow != null){
+            temp = slow.next;
+            slow.next = newhead;
+            newhead = slow;
+            slow = temp;
+        }
+        while(newhead != null){
+            if(newhead.val != head.val) return false;
+            head = head.next;
+            newhead = newhead.next;
+        }
+        return true;  
+    }
+}
