@@ -1,3 +1,4 @@
+Python:
 class Solution:
     def reverseList(self, head: ListNode) -> ListNode:
         if head == None or head.next == None:
@@ -9,3 +10,19 @@ class Solution:
             newhead = head
             head = temp
         return newhead
+
+Java:
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        if(head == null || head.next == null) return head;
+        ListNode newhead = null;
+        ListNode temp = null;
+        while(head != null){
+            temp = head.next;
+            head.next = newhead;
+            newhead = head;
+            head = temp;
+        }
+        return newhead;
+    }
+}
