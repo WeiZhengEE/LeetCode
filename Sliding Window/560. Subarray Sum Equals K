@@ -1,3 +1,4 @@
+Python:
 class Solution:
     def subarraySum(self, nums: List[int], k: int) -> int:
         if not nums:
@@ -11,3 +12,20 @@ class Solution:
                 res += record[currentsum-k]
             record[currentsum] = record.get(currentsum, 0)+1
         return res
+
+Java:
+class Solution {
+    public int subarraySum(int[] nums, int k) {
+        if(nums == null || nums.length == 0) return 0;
+        int res = 0;
+        int curSum = 0;
+        Map<Integer, Integer> oldSum = new HashMap<>();
+        oldSum.put(0, 1);
+        for(int i = 0; i < nums.length;i++){
+            curSum += nums[i];
+            if(oldSum.containsKey(curSum - k)) res += oldSum.get(curSum - k);
+            oldSum.put(curSum, oldSum.getOrDefault(curSum,0)+1);
+        }
+        return res;
+    }
+}
