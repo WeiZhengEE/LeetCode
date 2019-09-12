@@ -1,3 +1,4 @@
+Python:
 class Solution(object):
     def lengthOfLongestSubstring(self, s):
         """
@@ -16,3 +17,22 @@ class Solution(object):
             usedChar[s[i]] = i
 
         return maxLength
+
+Java:
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        int start = 0;
+        int maxLength = 0;
+        Map<Character, Integer> lastIndex = new HashMap<>();
+        for(int i = 0;i < s.length();i++){
+            char temp = s.charAt(i);
+            if(lastIndex.containsKey(temp) && start <= lastIndex.get(temp)){
+                start = lastIndex.get(temp)+1;
+            }else if(i - start + 1 > maxLength){
+                maxLength = i - start + 1;
+            }
+            lastIndex.put(temp, i);
+        }
+        return maxLength;
+    }
+}
