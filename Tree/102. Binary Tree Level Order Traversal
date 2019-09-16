@@ -1,3 +1,4 @@
+Python:
 class Solution:
     def levelOrder(self, root):
         """
@@ -20,3 +21,25 @@ class Solution:
             result.append(res)
             stack = newstack
         return result
+
+Java:
+class Solution {
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> res = new ArrayList<>();
+        if(root == null) return res;
+        List<TreeNode> nodes = new ArrayList<>();
+        nodes.add(root);
+        while(nodes.size() != 0){
+            List<TreeNode> newNodes = new ArrayList<>();
+            List<Integer> nodeVal = new ArrayList<>();
+            for(TreeNode node : nodes){
+                nodeVal.add(node.val);
+                if(node.left != null) newNodes.add(node.left);
+                if(node.right != null) newNodes.add(node.right);
+            }
+            res.add(nodeVal);
+            nodes = newNodes;
+        }
+        return res;       
+    }
+}
