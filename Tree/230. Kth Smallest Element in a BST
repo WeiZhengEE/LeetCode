@@ -1,3 +1,4 @@
+Python:
 class Solution:
     def kthSmallest(self, root: TreeNode, k: int) -> int:
         stack = []
@@ -10,3 +11,22 @@ class Solution:
             if k == 0:
                 return root.val
             root = root.right
+
+Java:
+import java.util.Stack;
+class Solution {
+    public int kthSmallest(TreeNode root, int k) {
+        Stack<TreeNode> stack = new Stack<>();
+        while(root != null || !stack.empty()){
+            while(root != null){
+                stack.push(root);
+                root = root.left;
+            }
+            root = stack.pop();
+            k -= 1;
+            if(k == 0) return root.val;
+            root = root.right;
+        }
+        return 0;
+    }
+}
