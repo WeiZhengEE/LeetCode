@@ -1,3 +1,4 @@
+Python:
 class Solution:
     def connect(self, root: 'Node') -> 'Node':
         ori = root
@@ -12,3 +13,25 @@ class Solution:
                 root = root.next
             root = next
         return ori
+
+Java:
+class Solution {
+    public Node connect(Node root) {
+        Node ori = root;
+        Node next = null;
+        while(root != null && root.left != null){
+            next = root.left;
+            while(root != null){
+                root.left.next = root.right;
+                if(root.next != null){
+                    root.right.next = root.next.left;
+                }else{
+                    root.right.next = null;
+                }
+                root = root.next;
+            }
+            root = next;
+        }
+        return ori;
+    }
+}
