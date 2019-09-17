@@ -1,3 +1,4 @@
+Python:
 class Solution:
     def __init__(self):
         self.prev = None
@@ -15,3 +16,18 @@ class Solution:
         root.right = self.prev
         root.left = None
         self.prev = root
+
+Java:
+class Solution {
+    private TreeNode prev = null;
+    
+    public void flatten(TreeNode root) {
+        if(root == null) return;
+        flatten(root.right);
+        flatten(root.left);
+        
+        root.right = prev;
+        root.left = null;
+        prev = root;
+    }
+}
