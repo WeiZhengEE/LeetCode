@@ -1,3 +1,4 @@
+Python:
 class Solution:
     def pathSum(self, root: TreeNode, sum: int) -> int:
         self.res = 0
@@ -17,3 +18,30 @@ class Solution:
         self.dfs(root.right, target, currentsum)
         
         self.pathrecord[currentsum] -= 1
+
+Java:
+class Solution {
+    private int res;
+    private Map<Integer, Integer> pathSum;
+    
+    public int pathSum(TreeNode root, int sum) {
+        this.res = 0;
+        this.pathSum = new HashMap<>();
+        pathSum.put(0, 1);
+        
+        dfs(root, sum, 0);
+        return this.res;
+        
+    }
+    public void dfs(TreeNode root, int target, int lastSum){
+        if(root == null) return;
+        int curSum = lastSum + root.val;
+        int oldSum = curSum - target;
+        this.res += pathSum.getOrDefault(oldSum, 0);
+        this.pathSum.put(curSum, pathSum.getOrDefault(curSum, 0)+1);
+        
+        dfs(root.left, target, curSum);
+        dfs(root.right, target, curSum);
+        this.pathSum.put(curSum, this.pathSum.get(curSum)-1);
+    } 
+}
