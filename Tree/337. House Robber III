@@ -1,3 +1,4 @@
+Python:
 class Solution(object):
     def rob(self, root):
         """
@@ -14,3 +15,22 @@ class Solution(object):
         left = self.helper(root.left)
         right = self.helper(root.right)
         return (root.val+left[1]+right[1], max(left)+max(right))
+
+Java:
+class Solution {
+    public int rob(TreeNode root) {
+        int[] res = helper(root);
+        return Math.max(res[0], res[1]);
+    }
+    
+    public int[] helper(TreeNode root){
+        int[] res = {0, 0};
+        if(root == null) return res;
+        int[] left = helper(root.left);
+        int[] right = helper(root.right);
+        res[0] = left[1] + right[1] + root.val;
+        res[1] = Math.max(left[0], left[1]) + Math.max(right[0], right[1]);
+        return res;
+        
+    }
+}
