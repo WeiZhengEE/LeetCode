@@ -1,3 +1,4 @@
+Python:
 class Solution:
     def inorderTraversal(self, root):
         """
@@ -13,3 +14,21 @@ class Solution:
             self.track(root.left,res)
             res.append(root.val)
             self.track(root.right,res)
+
+Java:
+class Solution {
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        travel(root, res);
+        return res;
+    }
+    
+    public void travel(TreeNode root, List<Integer> path){
+        if(root != null){
+            travel(root.left, path);
+            path.add(root.val);
+            travel(root.right, path);
+        }
+        return;
+    }
+}
