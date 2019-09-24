@@ -1,3 +1,4 @@
+Python:
 class Solution:
     def diameterOfBinaryTree(self, root: TreeNode) -> int:
         self.diameter = 0
@@ -16,3 +17,25 @@ class Solution:
         if length > self.diameter:
             self.diameter = length
         return max(r,l) + 1
+
+Java:
+class Solution {
+    private int maxLen;
+    public int diameterOfBinaryTree(TreeNode root) {
+        this.maxLen = 0;
+        height(root);
+        return this.maxLen;
+        
+    }
+    
+    public int height(TreeNode root){
+        if(root == null) return 0;
+        if(root.left == null && root.right == null) return 1;
+        int left = height(root.left);
+        int right = height(root.right);
+        int length = left + right;
+        if(length > this.maxLen) this.maxLen = length;
+        return Math.max(left, right) + 1;
+        
+    }
+}
