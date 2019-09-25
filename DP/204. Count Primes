@@ -1,3 +1,4 @@
+Python:
 class Solution:
     def countPrimes(self, n: int) -> int:
         if n < 2:
@@ -8,3 +9,25 @@ class Solution:
             if dp[i]:
                 dp[i*i:n:i] = [False]*len(dp[i*i:n:i])
         return sum(dp)
+
+Java:
+class Solution {
+    public int countPrimes(int n) {
+        if(n <= 1) return 0;
+        boolean[] notPrime = new boolean[n];
+        notPrime[0] = true;
+        notPrime[1] = true;
+        int count = 0;
+        for(int i = 2; i < Math.sqrt(n); i++){
+            if(!notPrime[i]){
+                for(int j = 2; i*j < n; j++){
+                    notPrime[i*j] = true;
+                }
+            }
+        }
+        for(int i = 2; i < n;i++){
+            if(!notPrime[i]) count++;
+        }
+        return count;
+    }
+}
