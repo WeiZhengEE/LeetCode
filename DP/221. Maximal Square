@@ -1,3 +1,4 @@
+Python:
 class Solution(object):
     def maximalSquare(self, matrix):
         """
@@ -17,3 +18,34 @@ class Solution(object):
                     dp[i][j] = 0
         lenth = max(max(i) for i in dp)
         return lenth**2
+
+Java:
+class Solution {
+    public int maximalSquare(char[][] matrix) {
+        if(matrix == null || matrix.length == 0 || matrix[0].length == 0) return 0;
+        int m = matrix.length;
+        int n = matrix[0].length;
+        int len = 0;
+        int[][] dp = new int[m][n];
+        for(int i = 0; i < m;i++){
+            for(int j = 0;j < n;j++){
+                if(matrix[i][j] == '0'){
+                    dp[i][j] = 0;
+                }else{
+                    dp[i][j] = 1;
+                    len = 1;
+                }
+            }
+        }
+        for(int i = 1; i < m; i++){
+            for(int j = 1;j < n; j++){
+                if(matrix[i][j] == '1'){
+                    dp[i][j] = Math.min(Math.min(dp[i-1][j], dp[i][j-1]), dp[i-1][j-1])+1;
+                    if(dp[i][j] > len) len = dp[i][j]; 
+                }
+            }
+        }
+        return len*len;
+        
+    }
+}
