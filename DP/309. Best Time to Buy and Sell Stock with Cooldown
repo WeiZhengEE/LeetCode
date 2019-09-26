@@ -1,3 +1,4 @@
+Python:
 class Solution(object):
     def maxProfit(self, price):
         """
@@ -8,3 +9,21 @@ class Solution(object):
         for p in price:
             nothold, hold, cooling = max(nothold, cooling), max(hold, nothold-p), hold+p
         return max(nothold, cooling)
+
+Java:
+class Solution {
+    public int maxProfit(int[] prices) {
+        int notHold = 0;
+        int hold = Integer.MIN_VALUE;
+        int cooling = 0;
+        for(int price: prices){
+            int newNotHold = Math.max(cooling, notHold);
+            int newHold = Math.max(hold, notHold-price);
+            int newCooling = hold+price;
+            notHold = newNotHold;
+            hold = newHold;
+            cooling = newCooling;
+        }
+        return Math.max(cooling, notHold);
+    }
+}
