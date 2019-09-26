@@ -1,3 +1,4 @@
+Python:
 class Solution:
     def coinChange(self, coins: List[int], amount: int) -> int:
 
@@ -15,3 +16,23 @@ class Solution:
             return -1
         else:
             return dp[amount]
+
+Java:
+class Solution {
+    public int coinChange(int[] coins, int amount) {
+        if(coins == null || coins.length == 0) return -1;
+        int[] dp = new int[amount+1];
+        Arrays.fill(dp, Integer.MAX_VALUE);
+        dp[0] = 0;
+        for(int i = 1; i <= amount; i++){
+            int temp = Integer.MAX_VALUE;
+            for(int j: coins){
+                if(i-j >= 0) temp = Math.min(temp, dp[i-j]); 
+            }
+            if(temp != Integer.MAX_VALUE) temp++;
+            dp[i] = temp;
+        }
+        if(dp[amount] == Integer.MAX_VALUE) return -1;
+        return dp[amount];        
+    }
+}
