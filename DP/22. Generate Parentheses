@@ -1,3 +1,4 @@
+Python:
 class Solution(object):
     def generateParenthesis(self, n):
         """
@@ -10,3 +11,22 @@ class Solution(object):
             for j in range(i):
                 dp[i] += ['(' + x + ')' + y for x in dp[j] for y in dp[i - j - 1]]
         return dp[n]
+
+Java:
+class Solution {
+    public List<String> generateParenthesis(int n) {
+        List<String> res = new ArrayList<>();
+        helper("", res, 0, 0, n);
+        return res;
+    }
+    
+    public void helper(String path, List<String> res, int open, int close, int max){
+        if(path.length() == 2*max){
+            res.add(path);
+            return;
+        }
+        if(open < max) helper(path+"(", res, open+1, close, max);
+        if(open > close) helper(path+")", res, open, close+1, max);
+        return;
+    }
+}
