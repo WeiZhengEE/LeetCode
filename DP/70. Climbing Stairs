@@ -1,3 +1,4 @@
+Python:
 class Solution:
     def climbStairs(self, n):
         """
@@ -11,3 +12,19 @@ class Solution:
         for i in range(2,n):
             ways[i] = ways[i-1] + ways[i-2]
         return ways[-1]
+
+Java:
+class Solution {
+    public int climbStairs(int n) {
+        if(n == 1) return 1;
+        int last2Step = 1;
+        int last1Step = 1;
+        int newStep = 2;
+        for(int i = 2; i <= n;i++){
+            newStep = last1Step + last2Step;       
+            last2Step = last1Step;
+            last1Step = newStep;
+        }
+        return newStep;
+    }
+}
