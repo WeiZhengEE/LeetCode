@@ -1,3 +1,4 @@
+Python:
 class Solution:
     def canPartition(self, nums: List[int]) -> bool:
         total = sum(nums)
@@ -8,3 +9,23 @@ class Solution:
             for j in range(total//2,0,-1):
                 dp[j] = dp[j] or (j-nums[i] >= 0 and dp[j-nums[i]])
         return dp[-1]
+
+Java:
+class Solution {
+    public boolean canPartition(int[] nums) {
+        int total = 0;
+        for(int num : nums){
+            total += num;
+        }
+        if(total % 2 != 0) return false;
+        boolean[] dp = new boolean[1+total/2];
+        dp[0] = true;
+        
+        for(int i = 0; i < nums.length; i++){
+            for(int j = total/2; j > 0;j--){
+                dp[j] = dp[j] || (j-nums[i] >= 0 && dp[j-nums[i]]);
+            }
+        }
+        return dp[total/2];
+    }
+}
